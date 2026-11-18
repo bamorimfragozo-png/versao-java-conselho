@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboards - Conselho de Classe IFSP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body class="bg-light p-4">
+    <div class="container" style="max-width: 860px;">
+        <h3 class="fw-bold mb-1"><i class="bi bi-grid me-2"></i>Dashboards disponíveis</h3>
+        <p class="text-muted">Escolha a versão do painel. Todas usam o mesmo <code>dados_alunos.json</code> e o mesmo servidor.</p>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-table me-2"></i>Dashboard Java</h5>
+                        <p class="card-text text-muted">Layout do DashboardApp JavaFX resgatado: KPIs no topo, tabela de disciplinas com sparkline, checkboxes de bimestre e gráfico de evolução.</p>
+                        <a href="/" class="btn btn-primary">Abrir Dashboard Java</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-bar-chart-line me-2"></i>Integração PDF</h5>
+                        <p class="card-text text-muted">Layout do integracao.html: upload de PDFs, tabela clicável por disciplina, rosca de frequência, barras de notas e evolução geral.</p>
+                        <a href="/integracao" class="btn btn-success">Abrir Integração PDF</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
