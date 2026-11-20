@@ -392,7 +392,7 @@ public class DashboardApp extends Application {
         napneBox.getChildren().addAll(lblNapneTitle, txtNapne, acaoBox, lblHistorico, listaAcoesNapne);
 
         VBox deliberacaoBox = new VBox(10);
-        Label lblDeliberacaoTitle = new Label("Encaminhamento / Deliberação do Conselho de Classe:");
+        Label lblDeliberacaoTitle = new Label("Encaminhamento / Deliberação do Conselho de Classe (Histórico deste aluno — não substituir o texto anterior):");
         lblDeliberacaoTitle.setStyle("-fx-font-weight: bold; -fx-text-fill: #6c757d;");
         
         txtDeliberacao = new TextArea();
