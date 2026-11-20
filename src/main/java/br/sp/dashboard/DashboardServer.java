@@ -82,7 +82,13 @@ public class DashboardServer {
 
     public static void main(String[] args) throws Exception {
         boolean forcarReprocessamento = Arrays.asList(args).contains("--processar-pdfs");
+        boolean remotoTinhaDados = GitHubSync.pull(dadosJson());
         garantirDados(forcarReprocessamento);
+        if (forcarReprocessamento || !remotoTinhaDados) {
+            GitHubSync.push(dadosJson(), forcarReprocessamento
+                    ? "Atualiza dados via reprocessamento de PDFs"
+                    : "Publica dados_alunos.json inicial");
+        }
 
         int porta = Integer.parseInt(System.getenv().getOrDefault("PORT", String.valueOf(PORTA_PADRAO)));
         HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", porta), 0);
@@ -189,6 +195,7 @@ public class DashboardServer {
     private static void responderDados(HttpExchange ex) throws IOException {
         List<Map<String, Object>> alunos;
         try {
+            GitHubSync.pull(dadosJson());
             alunos = carregarJson(dadosJson());
         } catch (Exception e) {
             responderJson(ex, 500, erro("JSON inválido: " + e.getMessage()));
@@ -211,6 +218,7 @@ public class DashboardServer {
             List<Map<String, Object>> alunos = MAPPER.convertValue(alunosNode,
                     new TypeReference<List<Map<String, Object>>>() {});
             salvarJson(alunos, dadosJson());
+            GitHubSync.push(dadosJson(), "Atualiza dados via dashboard (" + alunos.size() + " alunos)");
             Map<String, Object> resp = new LinkedHashMap<>();
             resp.put("ok", true);
             resp.put("arquivo", DADOS_JSON);
@@ -291,6 +299,7 @@ public class DashboardServer {
             }
             List<Map<String, Object>> alunos = mesclarAlunos(atuais, extraidos);
             salvarJson(alunos, dadosJson());
+            GitHubSync.push(dadosJson(), "Atualiza dados via processamento de PDFs (" + alunos.size() + " alunos)");
 
             Map<String, Object> resp = new LinkedHashMap<>();
             resp.put("ok", true);
